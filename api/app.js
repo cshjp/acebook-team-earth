@@ -9,6 +9,8 @@ const tokensRouter = require("./routes/tokens");
 const usersRouter = require("./routes/users");
 
 const app = express();
+// require('dotenv').config(); //AnnC adds 8/6/23
+
 
 // setup for receiving JSON
 app.use(express.json())

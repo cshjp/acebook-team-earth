@@ -2,11 +2,15 @@
 //this file defines the routes related to user operations(eg.signup,login)
 
 const express = require("express");
-const bcrypt = require('bcrypt'); //adds import bcrypt
 const router = express.Router();
 
-const User =require ('./api/models/User'); // adds import User
-const UsersController = require("../controllers/users");
+
+const UsersController  = require("../controllers/Users"); //
+
+router.post('/signup', UsersController.signupUser); // should be authController.signupUser
+router.post('/login', UsersController.loginUser); //
+
+//const UsersController = require("../controllers/users");
 
 //router.post("/", UsersController.Create);<previous one
 //pw is hashed again because the hashed version received from the client side 
@@ -40,10 +44,14 @@ router.post('/login', async (req, res) => {
         //validation and error handling here
         //
         const user = await User.findOne({ email });
-        if (!isPasswordValid) {
+        if (!user) {
             return res.status(401).json({ error: 'Invalid email or password, Please Try again!'});
         }
-
+        //compare the provided pw with stored hashed one
+        const isPasswordValid = await bcrypt.compare(password, user.password);
+        if(!isPasswordValid) {
+            return res.status(401).json({ error: 'Invalid email or password, Please Try again!'});
+        }
         //generate and send authentication token
         //
 

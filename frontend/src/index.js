@@ -4,6 +4,7 @@ import './index.css';
 import App from './components/app/App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
+// require('dotenv').config(); //AnnC adds 8/6/23
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

@@ -1,70 +1,42 @@
-// api/controllers/user.js  (should be authController.js)
+// api/controllers/user.js  (should be controllers/authController.js for clarification!!!)
 // this file incl the logic to create a new user in the database. 
 //the hashing operation isn't repeated  here because it's already done in 'api/models/user.js'
 //the controller is not utilized yet but kept for potential future use and for adhering to mvc pattern
 
-const bcrypt = require('bcrypt'); // adds import bcrypt
-const User = require("../models/user");
+// api/controllers/users.js
 
-const SignupUser =  async (req, res) => {
-  try {
-    const { name, email, password } = req.body;
-    //validation and error handling code
-    //
-    const existingUser = await User.findOne({ email });
-    if (existingUser) {
-      return res.status(409).json({ error: 'Email already exists, please try again.' });
+const User = require("../models/User");
+
+class UsersController {
+  static async signupUser(req, res) {
+    try {
+      const { name, email, password } = req.body;
+      const existingUser = await User.findOne({ email });
+      if (existingUser) {
+        return res.status(409).json({ error: 'Email already exists' });
+      }
+      const user = new User({ name, email, password });
+      await user.save()
+      res.status(201).json({ message: 'User signed up successfully' });
+    } catch (error) {
+      res.status(500).json({ error: 'Internal server error' });
     }
-
-    const hashedPassword = await bcrypt.hash(password, 10);
-    const user = new User({ name, email, password: hashedPassword });
-    await user.save();
-
-    res.status(201).json({ message: 'User signed up successfully' });
-  } catch (error) {
-    res.status(500).json({ error: 'Internal server error' });
   }
-};
 
-const loginUser = async (req, res) => {
-  try {
-    const { email, password } = req.body;
-
-    //validation and error handling here
-    //
-    const user = await User.findOne({ email });
-    if (!user) {
-      return res.status(401).json({ error: 'Invalid email and password' });
+  static async loginUser(req, res) {
+    try {
+      const { email, password } = req.body;
+      const user = await User.findOne({ email });
+      if (!user || !await user.isValidPassword(password)) {
+        return res.status(401).json({ error: 'Invalid email or password, Please Try again!'});
+      }
+      // Generate and send authentication token
+      // ...
+      res.status(200).json({ message: 'User logged in successfully' });
+    } catch (error) {
+      res.status(500).json({ error: 'Internal server error' });
     }
-  
-  const isPasswordValid = await bcrypt.compare(password, user.password);
-  if (!isPasswordValid) {
-    return res.status(401).json({ error: 'Invalid email and password' });
   }
-  //generate and send authntication token
-  //
-  res.status(200).json({ message: 'User logged in successfully' });
-} catch (error) {
-  res.status(500).json({ error: 'Internal server error' });
 }
-};
 
-module
-// // Define UsersController
-// const UsersController = {
-//   Create: async (req, res) => {
-    
-    
-//     const user = new User(req.body);
-//     try {
-//       await user.save();
-//       res.status(201).json({ message: 'OK' });
-//     } catch (err) {
-//       console.log(err); // Log the error
-//       res.status(400).json({message: 'Bad request'});
-//     }
-//   },
-// };
-
-// Export UsersController
 module.exports = UsersController;
