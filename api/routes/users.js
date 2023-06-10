@@ -5,14 +5,12 @@ const express = require("express");
 const router = express.Router();
 
 
-const UsersController  = require("../controllers/Users"); //
-
+const UsersController  = require("../controllers/users"); 
+//route for user signup
 router.post('/signup', UsersController.signupUser); // should be authController.signupUser
-router.post('/login', UsersController.loginUser); //
-
-//const UsersController = require("../controllers/users");
 
 //router.post("/", UsersController.Create);<previous one
+
 //pw is hashed again because the hashed version received from the client side 
 //might be intercepted and used for replay attacks.
 //hashed again at the server-side before storing the pw, adds an additional layer of security
@@ -52,8 +50,6 @@ router.post('/login', async (req, res) => {
         if(!isPasswordValid) {
             return res.status(401).json({ error: 'Invalid email or password, Please Try again!'});
         }
-        //generate and send authentication token
-        //
 
         res.status(200).json({ message: 'User logged in successfully' });
     } catch (error) {
