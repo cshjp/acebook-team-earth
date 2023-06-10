@@ -1,3 +1,6 @@
+//api/spec/models/user.spec.js
+
+
 const mongoose = require("mongoose");
 
 require("../mongodb_helper");
@@ -10,8 +13,18 @@ describe("User model", () => {
     });
   });
 
+  it("has a name of user", () => {
+    const user = new User({
+      name: "Candy Duck",
+      email: "someone@example.com",
+      password: "password",
+    });
+    expect(user.email).toEqual("someone@example.com");
+  });
+
   it("has an email address", () => {
     const user = new User({
+      name: "Candy Duck",
       email: "someone@example.com",
       password: "password",
     });
@@ -20,6 +33,7 @@ describe("User model", () => {
 
   it("has a password", () => {
     const user = new User({
+      name: "Candy Duck",
       email: "someone@example.com",
       password: "password",
     });
