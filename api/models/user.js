@@ -1,6 +1,8 @@
 // api/models/user.js
 //this file sets up a UserSchema for mongoDB
-// api/models/user.js
+//it has the pw hashing logic set up before saving to the DB
+//it includes a method for pw validation
+
 
 const bcrypt = require("bcrypt");
 const mongoose = require("mongoose");
@@ -19,7 +21,14 @@ UserSchema.pre('save', async function(next) {
 });
 
 UserSchema.methods.isValidPassword = async function(password) {
-  try {
+  // console.log('Entered password: ', password); //debug log
+  // const user = this;
+  // const compare = await bcrypt.compare(password, user.password);
+  // console.log('Comparison result: ', compare); //debug log
+  // return compare;
+  try {  
+    // console.log('Hashed password: ',this.password); //debug log
+    // const compare = await bcrypt.compare(password, this.password);  
     return await bcrypt.compare(password, this.password);
   } catch (error) {
     throw error;
@@ -29,3 +38,4 @@ UserSchema.methods.isValidPassword = async function(password) {
 const User = mongoose.model('User', UserSchema);
 
 module.exports = User;
+
