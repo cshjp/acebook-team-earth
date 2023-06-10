@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const createError = require("http-errors");
 const express = require("express");
 const path = require("path");
@@ -9,8 +11,6 @@ const tokensRouter = require("./routes/tokens");
 const usersRouter = require("./routes/users");
 
 const app = express();
-// require('dotenv').config(); //AnnC adds 8/6/23
-
 
 // setup for receiving JSON
 app.use(express.json())
@@ -21,7 +21,6 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // middleware function to check for valid tokens
 const tokenChecker = (req, res, next) => {
-
   let token;
   const authHeader = req.get("Authorization")
 
