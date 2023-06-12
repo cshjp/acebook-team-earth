@@ -1,16 +1,16 @@
 // api/models/token_generator.js
-require('dotenv').config(); //loading envir variables
+require('dotenv').config(); //loading environment variables
+//require('dotenv').config({ path: 'api/.env' });// both works but needs to swap sometimes!
+
 const JWT = require("jsonwebtoken");
 const secret = process.env.JWT_SECRET;
-
-// if (!secret) {
-//   console.error("Missing JWT_SECRET environment variable. Shutting down..");
-//   process.exit(1);
-// } for debug log
 
 class TokenGenerator {
   static jsonwebtoken(user_id) {
     const secret = process.env.JWT_SECRET;
+    if (!secret) {
+      throw new Error("JWT secret is not defined");// for debug log
+    }
     return JWT.sign(
       {
       user_id: user_id,

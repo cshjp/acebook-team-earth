@@ -9,9 +9,9 @@ const User = require("../../models/user"); // Import User model
 require('../mongodb_helper');
 
 describe("Tokens Routes", () => {
-  beforeEach(async () => {
-    await User.deleteMany({});
-  });
+  // beforeEach(async () => {
+  //   await User.deleteMany({});
+  // });
 
   afterAll(async () => {
     await mongoose.disconnect();
@@ -31,7 +31,7 @@ describe("Tokens Routes", () => {
 
     // Attempt login with valid credentials
     const response = await request(app)
-      .post("/users/login")
+      .post("/tokens/login")
       .send(user)
       .expect(200); // Expect a successful login response
 

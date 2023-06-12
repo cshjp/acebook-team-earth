@@ -45,7 +45,9 @@ const TokenController = {
       // const email = req.body.email;
       // const password = req.body.password;
 
-      const user = await User.findOne(email);
+      const filter = { email: email }
+      const user = await User.findOne(filter); //needs object
+
 
       if (!user || !await user.isValidPassword(password)) {
         console.log("auth error; Invalid email or password, Please Try again!");
