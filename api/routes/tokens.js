@@ -8,7 +8,7 @@ const router = express.Router();
 const TokenController = require("../controllers/tokens");
 
 //route for login and token generation
-router.post("/login", TokenController.login);
+router.post("/", TokenController.login);
 
 module.exports = router;
 

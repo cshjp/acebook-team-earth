@@ -63,7 +63,7 @@ const TokenController = {
       //if user exists and pw is valid, then generate a token for the user
       const token = await TokenGenerator.jsonwebtoken(user.id);
       // and responding with the token and a success msg
-      return res.status(200).json({ token: token, message: 'User logged in successfully' });
+      return res.status(201).json({ token: token, message: 'User logged in successfully' });
       //return res.status(201).json({ token: token, message: 'OK' });
   } catch (error) {
       console.log('auth error', error); // add debug log

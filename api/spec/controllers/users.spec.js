@@ -22,12 +22,12 @@ describe('UsersController', () => { //authController?
     //then expect 409 conflict response,hence we got 201
     //to solve it>first, create a user
     await request(app)
-      .post("/users/signup")
+      .post("/users")
       .send(user)
       .expect(201);
     //then, re-try to signup with the same email
     const response = await request(app)
-    .post("/users/signup")
+    .post("/users")
     .send(user)
     .expect(409);
 
