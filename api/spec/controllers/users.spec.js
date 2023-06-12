@@ -38,31 +38,3 @@ describe('UsersController', () => { //authController?
   expect(isValidPassword).toBe(true);
   });
 });
-
-//   describe("POST /users/signup", () => {
-//     it('should save a user with a hashed password', async () => {
-//       const response = await request(app)
-//         .post("/users/signup")
-//         .send({name: "Test User", email: "test@example.com", password: "plaintextpassword"});
-
-//       expect(response.status).toBe(201);
-//       const user = await User.findOne({email: "test@example.com"});
-//       console.log('Stored hashed password:', user.password);//for testing log the stored pw
-//       const validPassword = await user.isValidPassword("plaintextpassword");
-//       console.log('Bcrypt comparison result: ', validPassword); // testing log
-//       expect(validPassword).toBe(true);
-//     });
-
-//     it('should not signup user if email already exists', async () => {
-//       await request(app)
-//         .post("/users/signup")
-//         .send({name: "Test User", email: "test@example.com", password: "password"});
-
-//       const response = await request(app)
-//         .post("/users/signup")
-//         .send({name: "Test User", email: "test@example.com", password: "password"});
-
-//       expect(response.status).toBe(409);
-//     });
-//   });
-// });
