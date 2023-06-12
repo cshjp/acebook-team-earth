@@ -12,7 +12,7 @@ describe("/login", () => {
   //   await User.deleteMany({});
   // });
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     //const user = new User({ name: "Candy Duck", email: "test@test.com", password: "12345678" });//name: "Test User", 
     //await user.save();
     await User.create({ name: "Candy Duck 2", email: "test@test.com", password: "12345678" });
