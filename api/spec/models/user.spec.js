@@ -40,6 +40,15 @@ describe("User model", () => {
     expect(user.password).toEqual("password");
   });
 
+  it("has a username", () => {
+    const user = new User({
+      email: "someone@example.com",
+      password: "password",
+      username: "someuser",
+    });
+    expect(user.username).toEqual("someuser");
+  });
+
   it("can list all users", (done) => {
     User.find((err, users) => {
       expect(err).toBeNull();
@@ -50,22 +59,19 @@ describe("User model", () => {
 
   it("can save a user", (done) => {
     const user = new User({
-      name: "Candy Duck", // Adding the name field here
+      username: "someone",
       email: "someone@example.com",
       password: "password",
     }, 10000); //set timeout to 10 sec
  
     user.save((err) => {
       expect(err).toBeNull();
-  
       User.find((err, users) => {
         expect(err).toBeNull();
-  
         expect(users[0]).toMatchObject({
-          name: "Candy Duck", // Expect the name to be as provided
+          username: "someone",
           email: "someone@example.com",
         });
-
         //check a hashed pw exists
         expect(users[0].password).toBeDefined();
         expect(users[0].password).not.toEqual("password")// shouldn't = plaintext pw

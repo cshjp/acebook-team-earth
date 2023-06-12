@@ -7,10 +7,11 @@ const JWT = require("jsonwebtoken");
 const secret = process.env.JWT_SECRET;
 
 let token;
+let postId;
 
 describe("/posts", () => {
   beforeAll( async () => {
-    const user = new User({email: "test@test.com", password: "12345678"});
+    const user = new User({email: "test@test.com", password: "12345678", username: 'Fred'});
     await user.save();
 
     token = JWT.sign({
@@ -85,6 +86,27 @@ describe("/posts", () => {
     });
   })
 
+  describe("PATCH, when token is present", () => {
+    test("it updates a post", async() => {
+      let post = new Post({message: "this text will change"});
+      await post.save();
+      
+      let response = await request(app)
+      .patch("/posts/" + post._id + "/update")
+      .set("Authorization", `Bearer ${token}`)
+      .send({message: "this is a new message", token: token});
+      expect(response.status).toEqual(201);
+      
+      response = await request(app)
+        .get("/posts/" + post._id)
+        .set("Authorization", `Bearer ${token}`)
+        .send({token: token});
+
+      let result = response.body;
+      expect(result.post.message).toEqual("this is a new message");
+    })
+  })
+
   describe("GET, when token is present", () => {
     test("returns every post in the collection", async () => {
       let post1 = new Post({message: "howdy!"});
@@ -109,6 +131,19 @@ describe("/posts", () => {
         .set("Authorization", `Bearer ${token}`)
         .send({token: token});
       expect(response.status).toEqual(200);
+    })
+
+    // Trying to write a test for returning a single post, can't get it to work though
+    test("returns a single post", async () => {
+      let post = new Post({message: "this should be returned"});
+      let post_id = post._id;
+      await post.save();
+      let response = await request(app)
+        .get("/posts/" + post_id)
+        .set("Authorization", `Bearer ${token}`)
+        .send({token: token});
+      let result = response.body;
+      expect(result.post.message).toEqual("this should be returned");
     })
 
     test("returns a new token", async () => {
@@ -157,4 +192,42 @@ describe("/posts", () => {
       expect(response.body.token).toEqual(undefined);
     })
   })
+
+  describe("DELETE, when token is present", () => {
+    beforeEach(async () => {
+      const post = new Post({ message: "Delete" });
+      await post.save();
+      postId = post._id;
+    });
+
+    test("deletes a post and returns a confirmation message", async () => {
+      let response = await request(app)
+        .delete(`/posts/${postId}`)
+        .set("Authorization", `Bearer ${token}`);
+      expect(response.status).toEqual(200);
+      expect(response.body.message).toEqual("Post deleted");
+    });
+  });
+
+  describe("DELETE, when token is missing", () => {
+    beforeEach(async () => {
+      const post = new Post({ message: "Delete" });
+      await post.save();
+      postId = post._id;
+    });
+
+    test("responds with a 401", async () => { //401 = unauthorised. It confirms that the server
+      // denies access to the delete function due to the missing token.
+      let response = await request(app)
+        .delete(`/posts/${postId}`);
+      expect(response.status).toEqual(401);
+    });
+
+    test("does not delete the post", async () => {
+      await request(app)
+        .delete(`/posts/${postId}`);
+      let post = await Post.findById(postId);
+      expect(post).not.toBeNull(); // if post is not null, it means the post was not deleted
+    });
+  });
 });

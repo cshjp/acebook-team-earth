@@ -5,10 +5,15 @@ const request = require("supertest");
 require("../mongodb_helper");
 const User = require('../../models/user');
 
-describe("/login", () => { 
+describe("/tokens", () => { 
   beforeEach(async () => {
     await User.deleteMany({});
     await User.create({ email: "test@test.com", password: "12345678" });
+  });
+  
+  beforeAll( () => {
+    const user = new User({ email: "test@test.com", password: "12345678", username: 'Fred' })
+    user.save()
   });
 
   test("should return a token when credentials are valid", async () => {

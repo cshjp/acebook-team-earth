@@ -11,6 +11,7 @@ const UserSchema = new mongoose.Schema({
   name: { type: String, required: false },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
+  username: { type: String, required: false}, //// Defines the 'username' field as a string. username is not a string, Mongoose will throw error
 });
 
 UserSchema.pre('save', async function(next) {

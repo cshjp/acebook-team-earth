@@ -1,6 +1,9 @@
 import './App.css';
 import LoginForm from '../auth/LoginForm'
 import SignUpForm from '../user/SignUpForm'
+import UsernamePage from '../user/UsernamePage'
+import CreatePostForm from '../create-post/CreatePostForm';
+import UpdatePost from '../update-post/UpdatePost';
 import React, { useState } from 'react';
 import Feed from '../feed/Feed'
 import {
@@ -8,7 +11,6 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
-import CreatePostForm from '../create-post/CreatePostForm';
 
 const App = () => {
     return (
@@ -16,7 +18,9 @@ const App = () => {
           <Route path='/posts'  element={<Feed navigate={ useNavigate() }/>}/>
           <Route path='/login'  element={<LoginForm  navigate={ useNavigate() }/>}/>
           <Route path='/signup' element={<SignUpForm navigate={ useNavigate() }/>}/>
+          <Route path='/username' element={<UsernamePage />} /> // this adds a route to retrieve a username
           <Route path='/create-post' element={<CreatePostForm navigate={ useNavigate() }/>}/>
+          <Route path='/posts/:id/update' element={<UpdatePost navigate={ useNavigate() }/>}/>
         </Routes>
     );
 }
