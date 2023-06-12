@@ -5,7 +5,13 @@ const request = require("supertest");
 require("../mongodb_helper");
 const User = require('../../models/user');
 
-describe("/login", () => {
+describe("/login", () => { 
+  //adds this due to the fail on 'duplicate key error' for the email field
+  //so we have to clean the DB before each test, and here the beforeEach for
+  beforeEach(async () => {
+    await User.deleteMany({});
+  });
+
   beforeAll(async () => {
     //const user = new User({ name: "Candy Duck", email: "test@test.com", password: "12345678" });//name: "Test User", 
     //await user.save();
@@ -19,16 +25,23 @@ describe("/login", () => {
   })
 
   test("should return a token when credentials are valid", async () => {
-    const response = await request(app)
+    let response = await request(app)
       .post("/tokens/login")
       .send({name: "Candy Duck", email: "test@test.com", password: "12345678"})
       .expect(200);
 
     expect(response.body.token).toBeDefined();
     //expect(response.body.token).not.toEqual(undefined)
-    // expect(response.body.message).toEqual("OK") <prev
     //modify expected msg string
     expect(response.body.message).toEqual("User logged in successfully")
+
+    //login with invalid credentials
+    response = await request(app)
+      .post("/tokens/login")
+      .send({ name: "Candy Duck", email: "test@test.com", password: "wrongpassword"})
+      .expect(401);
+
+    expect(response.body.error).toEqual("auth error");
   });
 
 
@@ -36,12 +49,12 @@ describe("/login", () => {
     const response = await request(app)
       .post("/tokens/login") 
       .send({name: "Candy Duck", email: "test@test.com", password: "wrongpassword"})
-      //.expect(401);
+      .expect(401);
     
-    expect(response.status).toBe(401)
+    // expect(response.status).toBe(401)
     //expect(response.body.token).toBeUndefined();
     //modify expected msg string
     //expect(response.body.error).toEqual("Invalid email or password, Please Try again!")
-    // expect(response.body.message).toEqual("auth error")
+    expect(response.body.message).toEqual("auth error")
   });
 });

@@ -46,7 +46,7 @@ const TokenController = {
       // const password = req.body.password;
 
       const filter = { email: email }
-      const user = await User.findOne(filter); //needs object
+      const user = await User.findOne(filter); //prev (email)>failed as it needs object, hence i added line48
 
 
       if (!user || !await user.isValidPassword(password)) {
