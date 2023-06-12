@@ -1,8 +1,4 @@
 describe("Signing up", () => {
-  beforeEach(() => {
-    cy.tests_cleanup();
-  })
-
   it("with valid credentials, redirects to '/login'", () => {
     cy.visit("/signup");
     cy.get("#email").type("someone@example.com");

@@ -23,10 +23,6 @@ Cypress.Commands.add('login', (email, password) => {
   cy.get("#password").type(password);
   cy.get("#submit").click();
 })
-
-Cypress.Commands.add("tests_cleanup", () => {
-  cy.task("clearDB");
-})
 //
 //
 // -- This is a child command --
