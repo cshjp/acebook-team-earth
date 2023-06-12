@@ -36,7 +36,7 @@ const TokenController = {
   //login is an asynchronous method that handles the login process
   //or method for login and token generation
   login: async (req, res) => {
-    const name = req.body.name;
+    // const name = req.body.name;
     const email = req.body.email;
     const password = req.body.password;
 
@@ -45,14 +45,20 @@ const TokenController = {
       // const email = req.body.email;
       // const password = req.body.password;
 
-      const filter = { email: email }
-      const user = await User.findOne(filter); //prev (email)>failed as it needs object, hence i added line48
+      // const filter = { email: email }
+      const user = await User.findOne({ email: email }); //prev (email)>failed as it needs object, hence i added line48
 
+      console.log(user);
 
-      if (!user || !await user.isValidPassword(password)) {
+      let validPassword = await user.isValidPassword(password);
+
+      console.log(validPassword);
+
+      if (!user || !validPassword) {
         console.log("auth error; Invalid email or password, Please Try again!");
         return res.status(401).json({ message: 'auth error'});
       } 
+
       // Generate and send authentication token
       //if user exists and pw is valid, then generate a token for the user
       const token = await TokenGenerator.jsonwebtoken(user.id);

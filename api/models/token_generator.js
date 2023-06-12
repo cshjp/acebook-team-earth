@@ -1,5 +1,5 @@
 // api/models/token_generator.js
-require('dotenv').config(); //loading environment variables
+// require('dotenv').config(); //loading environment variables
 //require('dotenv').config({ path: 'api/.env' });// both works but needs to swap sometimes!
 
 const JWT = require("jsonwebtoken");
