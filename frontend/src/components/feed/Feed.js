@@ -24,25 +24,25 @@ const Feed = ({ navigate }) => {
     }
   }, [])
     
+  const postsArray = posts.map((post) => ( 
+    <div className="post" key={ post._id }>
+      <div className="duck"></div>
+      <Post post={ post }  />
+    </div> 
+  ));
 
-  const logout = () => {
-    window.localStorage.removeItem("token")
-    navigate('/login')
-  }
+  // const logout = () => {
+  //   window.localStorage.removeItem("token")
+  //   navigate('/login')
+  // }
   
     if(token) {
       return(
         <>
-        <div className="lake">
+          <h2>Posts</h2>
           <div id='feed' role="feed">
-              {posts.map((post) => ( 
-                <div className="post" key={ post._id }>
-                  <div className="duck"></div>
-                  <Post post={ post }  />
-                </div> 
-              ))}
+              { postsArray.reverse().map(a => a) }
           </div>
-        </div>
         </>
       )
     }
