@@ -8,11 +8,11 @@ describe("/users", () => {
     await User.deleteMany({});
   });
 
-  describe("POST, when email and password are provided", () => {
+  describe("POST, when email, password and username are provided", () => {
     test("the response code is 201", async () => {
       let response = await request(app)
         .post("/users")
-        .send({email: "poppy@email.com", password: "1234"})
+        .send({email: "poppy@email.com", password: "1234", username: "name"})
       expect(response.statusCode).toBe(201)
       expect(response.body.message).toBe('OK')
     })
@@ -20,7 +20,7 @@ describe("/users", () => {
     test("a user is created", async () => {
       await request(app)
         .post("/users")
-        .send({email: "scarlett@email.com", password: "1234"})
+        .send({email: "scarlett@email.com", password: "1234", name:"scarlett"})
       let users = await User.find()
       let newUser = users[users.length - 1]
       expect(newUser.email).toEqual("scarlett@email.com")
@@ -29,7 +29,7 @@ describe("/users", () => {
     test("if the email is already taken a user is not created", async () => {
       let response = await request(app)
         .post("/users")
-        .send({email: "email@test.com", password: "1234"})
+        .send({email: "email@test.com", password: "1234", name:"email"})
       expect(response.statusCode).toBe(201)
       expect(response.body.message).toBe('OK')
 
