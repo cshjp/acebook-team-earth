@@ -1,0 +1,44 @@
+/* CSS for the duck image */
+.duck {
+  position: absolute;
+  width: 100px; /* Adjust the size as needed */
+  height: 80px; /* Adjust the size as needed */
+  background-image: url('duck.png'); /* Replace 'duck.png' with your duck image path */
+  background-size: cover;
+}
+
+/* CSS for the lake */
+.lake {
+  position: relative;
+  width: 100%; /* Adjust the width as needed */
+  height: 300px; /* Adjust the height as needed */
+  background-color: lightblue; /* Customize the color of the lake */
+  overflow: hidden;
+}
+
+/* CSS for the posts container */
+#feed {
+  position: relative;
+  width: 100%; /* Adjust the width as needed */
+  height: 100%; /* Adjust the height as needed */
+}
+
+/* CSS for individual posts (ducks) */
+.post {
+  position: absolute;
+  animation-name: floating;
+  animation-duration: 5s; /* Adjust the animation duration as needed */
+  animation-iteration-count: infinite;
+}
+
+@keyframes floating {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px); /* Adjust the floating height as needed */
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
