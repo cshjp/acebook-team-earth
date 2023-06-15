@@ -32,14 +32,12 @@ const Post = ({ post }) => {
 };
 =======
 const Post = ({post}) => {
-  const updateLink = `/posts/${post._id}/update`;
-  const deleteLink = `/posts/${post._id}/delete`;
+  const viewPost = `/posts/${post._id}`;
 
   return(
     <article data-cy="post" key={ post._id }>
       { post.message }
-      <Link to={deleteLink}>Delete post</Link>
-      <Link to={updateLink} id="update-link">Update post</Link>
+      <Link to={viewPost} id="view-post-link">View post</Link>
     </article>
   )
 }
