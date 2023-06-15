@@ -41,7 +41,7 @@ body {
   background-position: center;
   z-index: -1;
   animation-name: eating;
-  animation-duration: 20s;
+  animation-duration: 2s;
   animation-iteration-count: infinite;
 }
 
@@ -61,11 +61,11 @@ body {
     transform: translate(0, 0);
   }
 
-  40% {
+  20% {
     transform: translate(-90px, 150px) rotate(-60deg);
   }
 
-  80% {
+  40% {
     transform: translate(0, 0);
 
   }

@@ -1,0 +1,80 @@
+.login-form {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  position: absolute;
+  top: 50%;
+  left: 30%;
+  transform: translate(-30%, -50%);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+input[type="text"],
+input[type="password"] {
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+input[type= "submit"] {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+input[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+.duck-body {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 1065px;
+  height: 768px;
+  z-index: -2;
+  background-image: url('../view-post/duck-body.png');
+  background-size: cover;
+  /* background-position: center; */
+}
+
+.duck-head {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 1065px;
+  height: 768px;
+  background-image: url('../view-post/duck-head.png');
+  background-size: cover;
+  background-position: center;
+  z-index: -1;
+  animation-name: eating;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+}
+
+
+@keyframes eating {
+  0% {
+    transform: translate(0, 0);
+  }
+
+  20% {
+    transform: translate(-90px, 150px) rotate(-60deg);
+  }
+
+  40% {
+    transform: translate(0, 0);
+
+  }
+
+}

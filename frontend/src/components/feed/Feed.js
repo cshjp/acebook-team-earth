@@ -44,8 +44,8 @@ const Feed = ({ navigate }) => {
                 className="duck"
                 key={post._id}
                 style={{
-                  left: `${Math.floor(Math.random() * 80)}%`,
-                  top: `${Math.floor(Math.random() * 80)}%`,
+                  left: `${Math.floor(Math.random() * 95)}%`,
+                  top: `${Math.floor(Math.random() * 100)}%`,
                 }}
               ></div>
             ))}
