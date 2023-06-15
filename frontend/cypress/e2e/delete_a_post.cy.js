@@ -12,6 +12,7 @@ describe('Deleting a post', () => {
       cy.get('#submit').click();
       cy.url().should("include", "/posts");
       cy.contains('quack-test');
+      cy.get('#view-post-link').click();
       cy.get('#delete-link').click();
       
       cy.get('#submit').click();
