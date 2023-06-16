@@ -1,6 +1,6 @@
 describe('Updating a post', () => {
   it('signs up', () => {
-    cy.signup("update@test.com", "update")
+    cy.signup("update@test.com", "update", "user")
   })
 
   it('should make a post when user is logged in', () => {

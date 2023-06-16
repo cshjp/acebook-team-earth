@@ -15,6 +15,7 @@ describe("Visiting homepage", () => {
     cy.visit("/signup");
     cy.get("#email").type("test@example.com");
     cy.get("#password").type("password");
+    cy.get("#username").type("username");
     cy.get("#submit").click();
     cy.url().should("include", "/login");
     

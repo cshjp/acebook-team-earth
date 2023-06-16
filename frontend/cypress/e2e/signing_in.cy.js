@@ -1,7 +1,7 @@
 describe("Signing in", () => {
 
   beforeEach(() => {
-    cy.signup("user@email.com", "12345678")
+    cy.signup("user@email.com", "12345678", "username")
   })
   
   it("with missing password, redirects to '/login'", () => {
