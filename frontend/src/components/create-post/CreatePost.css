@@ -1,0 +1,78 @@
+.create_post_form {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  position: absolute;
+  top: 50%;
+  left: 15%;
+  transform: translate(-30%, -50%);
+}
+
+.create_post_form textarea {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  width: 90%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.swimming_duck {
+  position: absolute;
+  height: 400px;
+  width: 500px;
+  /* right: -0; */
+  top: 30%;
+  background-image: url("../feed/duck.png");
+  background-size: cover;
+  animation-name: swimming_duck;
+  animation-duration: 20s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes swimming_duck {
+  0% {
+    right: 0;
+    transform: rotateY(0deg) translateY(0px);
+  }
+  10% {
+    transform: rotateY(0deg) translateY(-30px);
+  }
+  20% {
+    transform: rotateY(0deg) translateY(0px);
+  }
+  30% {
+    transform: rotateY(0deg) translateY(0px);
+  }
+  40% {
+    transform: rotateY(0deg) translateY(-30px);
+  }
+  49% {
+    transform: rotateY(0deg);
+  }
+  50% {
+    right: 50%; 
+    transform: rotateY(180deg) translateY(0px);
+  }
+  60% {
+    transform: rotateY(180deg) translateY(-30px);
+  }
+  70% {
+    transform: rotateY(180deg) translateY(0px);
+  }
+  80% {
+    transform: rotateY(180deg) translateY(-30px);
+  }
+  90% {
+    transform: rotateY(180deg) translateY(0px);
+  }
+  99% {
+    transform: rotateY(180deg);
+  }
+  100% {
+    right: 0;
+    transform: rotateY(0deg);
+  }
+}
