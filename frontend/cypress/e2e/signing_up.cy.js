@@ -19,6 +19,7 @@ describe("Signing up", () => {
     cy.visit("/signup");
     cy.get("#email").type("signuptest@example.com");
     cy.get("#password").type("password");
+    cy.get("#username").type("username");
     cy.get("#submit").click();
 
     cy.url().should("include", "/login");

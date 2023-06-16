@@ -5,7 +5,7 @@ describe('Making a post', () => {
   //   cy.login("duck@pond.com", "Il0veBread")
   // });
   it('signs up', () => {
-    cy.signup("duck@pond.com", "Il0veBread")
+    cy.signup("duck@pond.com", "Il0veBread", "username")
   })
 
   it('should make a post when user is logged in', () => {
