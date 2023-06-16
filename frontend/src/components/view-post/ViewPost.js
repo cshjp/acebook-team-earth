@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { Link } from 'react-router-dom';
+import "./ViewPost.css";
 
 
 const ViewPost = ({ navigate }) => {
@@ -55,17 +56,19 @@ const ViewPost = ({ navigate }) => {
   // };
 
   return (
-    <div>
-        <>
-          <h2>View Post: {post._id}</h2>
-          <p>Author: {post.author}</p>
-          <p>Message: {post.message}</p>
-          <div>
-            <Link to={updateLink} id="update-link">Update post</Link>
-            <Link to={deleteLink} id="delete-link">Delete post</Link>
-          </div>
-        </>
-    </div>
+    <>
+      <div className="duck-body"></div>
+      <div className="duck-head"></div>
+      <div className="single-post">
+        <h2>View Post: {post._id}</h2>
+        <p>Author: {post.author}</p>
+        <p>Message: {post.message}</p>
+        <div>
+          <Link to={updateLink} id="update-link">Update post</Link>
+          <Link to={deleteLink} id="delete-link">Delete post</Link>
+        </div>
+      </div>
+    </>
   );
 };
 

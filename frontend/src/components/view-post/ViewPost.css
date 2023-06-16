@@ -1,0 +1,73 @@
+body {
+  /* padding: 0; */
+  /* margin: 0; */
+  background-color: lightblue;
+  /* overflow: hidden; */
+}
+
+.lake {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background-color: lightblue;
+  overflow: hidden;
+  z-index: 0;
+  background-size: cover;
+  background-position: center;
+  bottom: 0;
+  right: 0;
+}
+
+.duck-body {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 1065px;
+  height: 768px;
+  z-index: -2;
+  background-image: url('duck-body.png');
+  background-size: cover;
+  /* background-position: center; */
+}
+
+.duck-head {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 1065px;
+  height: 768px;
+  background-image: url('duck-head.png');
+  background-size: cover;
+  background-position: center;
+  z-index: -1;
+  animation-name: eating;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+}
+
+.single-post {
+  width: 35vw;
+  height: 50vh;
+  padding-left: 20px;
+  padding-top: 20px;
+  margin-bottom: 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+@keyframes eating {
+  0% {
+    transform: translate(0, 0);
+  }
+
+  20% {
+    transform: translate(-90px, 150px) rotate(-60deg);
+  }
+
+  40% {
+    transform: translate(0, 0);
+
+  }
+
+}

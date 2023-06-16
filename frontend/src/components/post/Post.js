@@ -5,10 +5,14 @@ const Post = ({post}) => {
   const viewPost = `/posts/${post._id}`;
 
   return(
-    <article data-cy="post" key={ post._id }>
-      { post.message }
-      <Link to={viewPost} id="view-post-link">View post</Link>
-    </article>
+
+      <div className='post'>
+        <article data-cy="post" key={ post._id } className="article">
+          { post.message }
+          <br/><Link to={viewPost} id="view-post-link" className="post-link">View post</Link>
+        </article>
+      </div>
+
   )
 }
 
