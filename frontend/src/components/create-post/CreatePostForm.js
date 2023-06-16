@@ -1,4 +1,5 @@
 import { useState } from "react"
+import "./CreatePost.css"
 
 const CreatePostForm = ({ navigate }) => {
   const [message, setMessage] = useState("");
@@ -27,10 +28,15 @@ const CreatePostForm = ({ navigate }) => {
   // handleMessageChange is called when the user types in the input field
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input placeholder="E.G. How's your day?" id="message" type="text" value={message} onChange={handleMessageChange} />
-      <input role='submit-button' id='submit' type="submit" value="Post!" />
-    </form>
+    <>
+    <div className="swimming_duck"></div>
+    <div className="create_post_form">
+      <form onSubmit={handleSubmit}>
+        <textarea placeholder="E.G. How's your day?" id="message" type="text" value={message} onChange={handleMessageChange} />
+        <input role='submit-button' id='submit' type="submit" value="Post!" />
+      </form>
+    </div>
+    </>
   )
 }
 
