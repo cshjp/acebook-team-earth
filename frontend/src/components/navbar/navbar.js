@@ -35,10 +35,10 @@ const Navbar = ({navigate}) => {
           <img className="navImage" src='logo-airbook-removebg.png' alt="logo" />
         </Link>
       </div>
-      <button type="button" id="create-post-button" onClick={createPost}>Create Your Own Damn Post, Asshole</button>
-      <button type="button" id="logout" onClick={logout}>
-        Logout
-      </button>
+      <div className="navLinks">
+        <button type="button" id="create-post-button" onClick={createPost}>Create Post</button>
+        <button type="button" id="logout" onClick={logout}>Logout</button>
+      </div>
     </nav>
   );
     } else {
@@ -49,8 +49,10 @@ const Navbar = ({navigate}) => {
               <img className="navImage" src='logo-airbook-removebg.png' alt="logo" />
             </Link>
           </div>
-          <button type="button" id="login-btn" onClick={navigateToLogin}>Log in!</button>
-          <button type="button" id="signup-btn" onClick={navigateToSignup}>Sign up!</button>
+          <div className="navLinks">
+            <button type="button" id="login-btn" onClick={navigateToLogin}>Log in!</button>
+            <button type="button" id="signup-btn" onClick={navigateToSignup}>Sign up!</button>
+          </div>
         </nav>
       )
     }
