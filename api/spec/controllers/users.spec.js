@@ -20,7 +20,7 @@ describe("/users", () => {
     test("a user is created", async () => {
       await request(app)
         .post("/users")
-        .send({email: "scarlett@email.com", password: "1234", name:"scarlett"})
+        .send({email: "scarlett@email.com", password: "1234", username:"scarlett"})
       let users = await User.find()
       let newUser = users[users.length - 1]
       expect(newUser.email).toEqual("scarlett@email.com")
@@ -29,7 +29,7 @@ describe("/users", () => {
     test("if the email is already taken a user is not created", async () => {
       let response = await request(app)
         .post("/users")
-        .send({email: "email@test.com", password: "1234", name:"email"})
+        .send({email: "email@test.com", password: "1234", username:"email"})
       expect(response.statusCode).toBe(201)
       expect(response.body.message).toBe('OK')
 
