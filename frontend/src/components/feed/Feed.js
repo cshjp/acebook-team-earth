@@ -25,7 +25,7 @@ const Feed = ({ navigate }) => {
   }, [])
     
   const postsArray = posts.map((post) => ( 
-    <div className="post" key={ post._id }>
+    <div key={ post._id }>
       <Post post={ post }  />
     </div> 
   ));
