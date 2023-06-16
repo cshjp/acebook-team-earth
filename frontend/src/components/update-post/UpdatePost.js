@@ -1,3 +1,4 @@
+import "./UpdatePost.css";
 import { useEffect, useState } from "react"
 import { useParams } from "react-router";
 
@@ -47,12 +48,15 @@ const UpdatePost = ({ navigate }) => {
   
   return(
     <>
-      <h2>Update post: {`${post_id.id}`}</h2>
-      <p>{placeholderContent}</p>
-      <form onSubmit={handleSubmit}>
-      <input placeholder={placeholderContent} id="message" type="text" value={message} onChange={handleMessageChange} />
-      <input role='submit-button' id='submit' type="submit" value="Update!" />
-    </form>
+      <div className="update_posts_form">
+        <h2>Update post: </h2>
+        <p>{placeholderContent}</p>
+        <form onSubmit={handleSubmit}>
+        <input placeholder={placeholderContent} id="message" type="text" value={message} onChange={handleMessageChange} />
+        <input role='submit-button' id='submit' type="submit" value="Update!" />
+        </form>
+      </div>
+      <footer>{`${post_id.id}`}</footer>
     </>
   )
 }

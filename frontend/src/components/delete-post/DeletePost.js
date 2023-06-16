@@ -1,4 +1,4 @@
-
+import "./DeletePost.css";
 import { useEffect, useState } from "react"
 import { useParams } from "react-router";
 
@@ -38,11 +38,13 @@ const DeletePost = ({ navigate }) => {
   
   return(
     <>
-      <h2>Delete post: {`${post_id.id}`}</h2>
-      <p>{postContent}</p>
-      <form onSubmit={handleDelete}>
-      <input role='submit-button' id='submit' type="submit" value="Delete" />
-      </form>
+      <div className="delete_posts">
+        <h2>Delete post: {(postContent.substring(0,5)+"...")}</h2>
+        <p>{postContent}</p>
+        <form onSubmit={handleDelete}>
+        <input role='submit-button' id='submit' type="submit" value="Delete" />
+        </form>
+      </div>
     </>
   )
 }
